@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="./index.js"></script>
+   
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap" rel="stylesheet">
+   
+    <title>🗒TO DO LIST</title>
+    <style>
+        body {
+            font-family: 'Amatic SC', cursive; 
+            font-size: xx-large;
+            line-height: 35px;
+            background-color: #f4f4f4;
+            opacity: 1;
+            background-image: radial-gradient(#7c7c7c 1.1500000000000001px, #f4f4f4ad 1.1500000000000001px);
+            background-size: 23px 23px;
+        }
+        
+        #midiv {
+            width: 100%;
+            height: 100%;
+        }
+
+        button {
+            margin-left: 10px;
+            margin-right: 10px;
+            box-shadow:inset 0px 1px 0px 0px #ffffff;
+            background:linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
+            background-color:#ededed;
+            border-radius:6px;
+            border:1px solid #dcdcdc;
+            display:inline-block;
+            cursor:pointer;
+            color:#777777;
+            font-family:Arial;
+            font-size:15px;
+            font-weight:bold;
+            padding:6px 24px;
+            text-decoration:none;
+            text-shadow:0px 1px 0px #ffffff;
+        }
+
+        button {
+            background:linear-gradient(to bottom, #dfdfdf 5%, #ededed 100%);
+            background-color:#dfdfdf;
+           
+        }
+
+        input  {
+            padding: 5px;
+            padding-left: 20px;
+            font-size: 15px;
+            border-width: 2px;
+            border-color: #CCCCCC;
+            background-color: #FFFFFF;
+            color: #000000;
+            border-style: solid;
+            border-radius: 3px;
+            box-shadow: 4px 5px 9px rgba(108,108,108,.75);
+            text-shadow: 2px 0px 15px rgba(66,66,66,.0);
+        }
+
+    </style>
+</head>
+<body>
+    <div id="midiv" class="container">
+        <h2> &nbsp; Tareas📄</h2>
+        <ol>
+            <li v-for="(nota, id) in todos ">
+                <strike v-if="nota.completado"> {{ nota.text }}  </strike>
+                <span v-else class="title" >{{ nota.text }}</span>
+                <input type="checkbox" v-model="nota.completado"> &nbsp;
+                  Prioridad {{ nota.prioridad }}  {{ nota.date.getDate() }}/{{ nota.date.getMonth() }}/{{ nota.date.getFullYear() }}
+                <button v-on:click="borrar_de_lista(id)">Borrar</button>
+              </li>
+          </ol>
+
+        <p>
+            <input type="text" v-model="todoText" placeholder=" " />
+            <button v-on:click="addTodo()">Añadir</button>  
+                <select v-model="selected">
+                    <option>Alta</option>
+                    <option>Media</option>
+                    <option>Baja</option>
+                  </select>
+        </p>
+
+
+    <button  v-on:click="clearAll" >
+        <i class="fa fa-trash"></i> Borrar todas las tareas
+    </button>
+
+    <button  v-on:click="mostrar_no_completadas" disabled>
+        <i class="fa fa-trash"></i> Ver sin completar
+    </button>
+
+    <button  v-on:click="mostrar_completadas" disabled>
+        <i class="fa fa-trash"></i> Ver completadas
+    </button>
+        <small v-if="incomplete">{{ incomplete }}</small>
+    </div>
+</body>
+</html>
