@@ -92,19 +92,10 @@
                   </select>
         </p>
 
-
     <button  v-on:click="clearAll" >
         <i class="fa fa-trash"></i> Borrar todas las tareas
     </button>
 
-    <button  v-on:click="mostrar_no_completadas" disabled>
-        <i class="fa fa-trash"></i> Ver sin completar
-    </button>
-
-    <button  v-on:click="mostrar_completadas" disabled>
-        <i class="fa fa-trash"></i> Ver completadas
-    </button>
-        <small v-if="incomplete">{{ incomplete }}</small>
     </div>
 </body>
 </html>
